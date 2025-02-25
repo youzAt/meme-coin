@@ -1,0 +1,65 @@
+.formContainer {
+	display: flex;
+	flex-direction: column;
+}
+.formContainer h2 {
+	text-align: center;
+	margin-bottom: 24px;
+}
+.formContainer form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+.formContainer a {
+	color: var(--color-blue-600);
+}
+.formContainer > p {
+    margin-top: 32px;
+	color: var(--color-slate-500);
+	text-align: center;
+}
+.formContainer > p a {
+	color: var(--color-blue-600);
+}
+.formContainer form p{
+    color: var(--color-slate-400);
+    list-style: circle;
+}
+.inputBox {
+	position: relative;
+}
+.inputBox input{
+	width: 100%;
+    padding-left: 48px;
+}
+.inputBox img{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 16px;
+}
+.passIcon{
+	position: absolute;
+	right: unset !important;
+	left: 16px;
+	width: 20px;
+	cursor: pointer;
+}
+.privacy{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+.privacy label{
+	color: var(--color-slate-600);
+	cursor: pointer;
+}
+.privacy input{
+	width: 20px;
+	height: 20px;
+	border-radius: 4px;
+	border-color: var(--color-slate-400);
+	outline: none;
+}

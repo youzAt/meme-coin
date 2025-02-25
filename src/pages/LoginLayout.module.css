@@ -1,0 +1,49 @@
+.layout {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	height: 100%;
+}
+.image {
+	padding: 16px;
+	height: 100dvh;
+	overflow: hidden;
+	position: relative;
+}
+.image img {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+    border-radius: 8px;
+}
+.image p {
+	color: #fff;
+	position: absolute;
+	top: 42px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 32px;
+	width: 90%;
+	padding: 24px;
+	background-color: #d9d9d933;
+	backdrop-filter: blur(48px);
+	border-radius: 4px;
+	text-align: center;
+}
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.formContainer > img{
+    position: absolute;
+    top: 48px;
+}
+.central {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+	width: 100%;
+	padding: 0 32px;
+}

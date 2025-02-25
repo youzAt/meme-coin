@@ -1,0 +1,13 @@
+.btn{
+    background-color: var(--color-primary);
+    color: #F8FAFC;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.9;
+    }
+}

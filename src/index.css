@@ -1,13 +1,59 @@
+@import url(fonts.css);
 *,
 *::after,
 *::before {
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+	font-family: "irancell";
 }
-li{
-  list-style: none;
+:root {
+	/* colors */
+	--color-slate-800: #1e293b;
+	--color-slate-700: #334155;
+	--color-slate-600: #475569;
+	--color-slate-500: #64748b;
+	--color-slate-400: #94a3b8;
+	--color-blue-600: #2563eb;
+	--color-primary: #104370;
 }
-a{
-  text-decoration: none;
+
+li {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+h1 {
+	font-size: 32px;
+	font-weight: 400;
+}
+h2 {
+	font-size: 28px;
+	font-weight: 400;
+}
+h3 {
+	font-size: 24px;
+	font-weight: 300;
+}
+h4 {
+	font-size: 18px;
+	font-weight: 400;
+}
+.caption {
+	font-size: 14px;
+	font-weight: 400;
+}
+.body {
+	font-size: 16px;
+	font-weight: 400;
+}
+.container{
+	width: 100%;
+	margin: auto;
+	max-width: 1440px;
+	padding:  0 32px;
+}
+body{
+	height: 100vh;
 }

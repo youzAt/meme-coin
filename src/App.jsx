@@ -1,5 +1,7 @@
+import Routes from "./routes";
+
 function App() {
-	return <h2>meme coin</h2>;
+	return <Routes/>;
 }
 
 export default App;
