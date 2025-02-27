@@ -5,7 +5,6 @@ import eyeShowIcon from "../assets/icons/eye-show.svg";
 import eyeHideIcon from "../assets/icons/eye-hide.svg";
 import Button from "../features/UI/Button";
 import { useSignup } from "../features/userAuth/useSignup";
-import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 
 const Signup = () => {
@@ -14,8 +13,6 @@ const Signup = () => {
 	const [signupInfo, setSignupInfo] = useState({});
 	const [privacyCheck, setPrivacyCheck] = useState(false);
 	const { mutate: signup, isPending } = useSignup();
-	const navigate = useNavigate();
-	console.log(isPending);
 	const userSignupHandler = (e) => {
 		e.preventDefault();
 		if (!privacyCheck) {
@@ -29,19 +26,7 @@ const Signup = () => {
 		if (signupInfo.password !== signupInfo.confirm_password) {
 			alert("رمز عبور و تکرار آن باید برابر باشند");
 		}
-		signup(signupInfo, {
-			onSuccess: (data) => {
-				localStorage.setItem("memeCoin-access", data.access);
-				localStorage.setItem("memeCoin-refresh", data.refresh);
-				navigate("/");
-				console.log("jigiloooooooooooo");
-			},
-			onError: (er) => {
-				alert(Object.entries(er.response.data)[0][1][0]);
-			},
-		});
-
-		console.log(signupInfo);
+		signup(signupInfo);
 	};
 	return (
 		<div className={styles.formContainer}>

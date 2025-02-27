@@ -1,19 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
-import { signup } from "../../services/apiUser";
+import { login } from "../../services/apiUser";
 import { useNavigate } from "react-router-dom";
 
-export const useSignup = () => {
+export const useLogin = () => {
 	const navigate = useNavigate();
 	const { mutate, isPending } = useMutation({
-		mutationFn: signup,
+		mutationFn: login,
 		onSuccess: (data) => {
 			localStorage.setItem("memeCoin-access", data.access);
 			localStorage.setItem("memeCoin-refresh", data.refresh);
 			navigate("/");
 		},
-		onError: (er) => {
-			alert(Object.entries(er.response.data)[0][1][0]);
+		onError: () => {
+			alert("نام کاربری یا رمز عبور وارد شده اشتباه است");
 		},
 	});
+
 	return { mutate, isPending };
 };

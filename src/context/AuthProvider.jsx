@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 import {
 	createContext,
@@ -26,7 +27,9 @@ const AuthProvider = ({ children }) => {
 		localStorage.getItem("memecoin-refresh")
 	);
 	const [isLoading, setIsLoading] = useState(false);
-	const [isLogin, setIsLogin] = useState(Boolean(localStorage.getItem("memecoin-access")));
+	const [isLogin, setIsLogin] = useState(
+		Boolean(localStorage.getItem("memecoin-access"))
+	);
 
 	useEffect(() => {
 		const loginCheck = async () => {
@@ -37,9 +40,7 @@ const AuthProvider = ({ children }) => {
 				return;
 			}
 			try {
-				const data = await api.post("/users/token/refresh/", {
-					refresh: refreshToken
-				});
+				const data = await api.get("/users/checklogin/");
 				console.log(data);
 				setIsLogin(true);
 			} catch {
