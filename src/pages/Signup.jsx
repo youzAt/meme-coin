@@ -4,25 +4,78 @@ import styles from "./Signup.module.css";
 import eyeShowIcon from "../assets/icons/eye-show.svg";
 import eyeHideIcon from "../assets/icons/eye-hide.svg";
 import Button from "../features/UI/Button";
+import { useSignup } from "../features/userAuth/useSignup";
+import { useNavigate } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
 const Signup = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showPasswordRepeat, setShowPasswordRepeat] = useState(false);
+	const [signupInfo, setSignupInfo] = useState({});
+	const [privacyCheck, setPrivacyCheck] = useState(false);
+	const { mutate: signup, isPending } = useSignup();
+	const navigate = useNavigate();
+	console.log(isPending);
+	const userSignupHandler = (e) => {
+		e.preventDefault();
+		if (!privacyCheck) {
+			alert("قوانین و مقررات را نپذیرفته اید");
+			return;
+		}
+		if (Object.values(signupInfo).length !== 5) {
+			alert("باید تمامی فیلد ها را پر کنید");
+			return;
+		}
+		if (signupInfo.password !== signupInfo.confirm_password) {
+			alert("رمز عبور و تکرار آن باید برابر باشند");
+		}
+		signup(signupInfo, {
+			onSuccess: (data) => {
+				localStorage.setItem("memeCoin-access", data.access);
+				localStorage.setItem("memeCoin-refresh", data.refresh);
+				navigate("/");
+				console.log("jigiloooooooooooo");
+			},
+			onError: (er) => {
+				alert(Object.entries(er.response.data)[0][1][0]);
+			},
+		});
+
+		console.log(signupInfo);
+	};
 	return (
 		<div className={styles.formContainer}>
 			<h2>ایجاد حساب کاربری</h2>
-			<form>
+			<form onSubmit={userSignupHandler}>
 				<Input
 					name="first-name"
 					placeholder="نام خود را وارد کنید ..."
+					onChange={(e) =>
+						setSignupInfo((cur) => {
+							return { ...cur, first_name: e.target.value };
+						})
+					}
+					value={signupInfo.first_name || ""}
 				/>
 				<Input
 					name="last-name"
 					placeholder="نام خانوادگی خود را وارد کنید ..."
+					onChange={(e) =>
+						setSignupInfo((cur) => {
+							return { ...cur, last_name: e.target.value };
+						})
+					}
+					value={signupInfo.last_name || ""}
 				/>
 				<Input
 					name="username"
 					placeholder="نام کاربری خود را وارد کنید ..."
+					onChange={(e) =>
+						setSignupInfo((cur) => {
+							return { ...cur, username: e.target.value };
+						})
+					}
+					value={signupInfo.username || ""}
 				/>
 				<p className={"caption " + styles.userMessage}>
 					* از نام کاربری برای ورود به برنامه استفاده می‌شود.
@@ -32,6 +85,12 @@ const Signup = () => {
 					<Input
 						type={showPassword ? "text" : "password"}
 						placeholder="رمز عبور خود را وارد کنید ..."
+						onChange={(e) =>
+							setSignupInfo((cur) => {
+								return { ...cur, password: e.target.value };
+							})
+						}
+						value={signupInfo.password || ""}
 					/>
 					<img
 						className={styles.passIcon}
@@ -44,6 +103,15 @@ const Signup = () => {
 					<Input
 						type={showPasswordRepeat ? "text" : "password"}
 						placeholder="رمز عبور خود را مجدد وارد کنید ..."
+						onChange={(e) =>
+							setSignupInfo((cur) => {
+								return {
+									...cur,
+									confirm_password: e.target.value,
+								};
+							})
+						}
+						value={signupInfo.confirm_password || ""}
 					/>
 					<img
 						className={styles.passIcon}
@@ -53,12 +121,19 @@ const Signup = () => {
 					/>
 				</div>
 				<div className={styles.privacy}>
-					<input type="checkbox" id="privacy" />
+					<input
+						type="checkbox"
+						id="privacy"
+						checked={privacyCheck}
+						onChange={(e) => setPrivacyCheck(e.target.value)}
+					/>
 					<label className="caption" htmlFor="privacy">
 						قوانین و مقررات را می‌پذیرم.
 					</label>
 				</div>
-				<Button>ایجاد حساب</Button>
+				<Button disabled={isPending}>
+					{isPending ? <BeatLoader color="#fff" /> : "ایجاد حساب"}
+				</Button>
 			</form>
 		</div>
 	);
