@@ -10,7 +10,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid var(--color-primary);
+    gap: 4px;
     &:hover{
         opacity: 0.9;
     }
+}
+.btn:global(.body){
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+.btn.secondary{
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: transparent;
 }

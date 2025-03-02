@@ -1,0 +1,23 @@
+.box {
+	border-radius: 8px;
+	border: 1px solid #cbd5e1;
+	background: #f8fafc;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+}
+.action{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btns{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.box h4, .balance{
+    color: var(--color-slate-800);
+}

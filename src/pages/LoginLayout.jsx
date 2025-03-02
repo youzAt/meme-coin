@@ -16,7 +16,7 @@ const LoginLayout = () => {
 				<img src={loginPhoto} alt="login photo" />
 			</div>
 		</main>
-	);
+	)
 };
 
 export default LoginLayout;

@@ -1,0 +1,30 @@
+.avatar{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.details{
+    color: var(--color-slate-500);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.date, .profile{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.item{
+    padding: 16px 0;
+    border-bottom: 1px solid #94A3B840;
+}
+.message{
+    color: var(--color-slate-600)
+}

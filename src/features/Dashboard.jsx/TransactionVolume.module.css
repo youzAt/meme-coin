@@ -1,0 +1,90 @@
+.headingContainer {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 0 24px 24px 24px;
+}
+.heading {
+	border-radius: 4px;
+	background: rgba(148, 163, 184, 0.1);
+	backdrop-filter: blur(12px);
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	flex-basis: 50%;
+}
+.heading > span {
+	color: var(--color-slate-700);
+}
+.status {
+	display: flex;
+	align-items: center;
+}
+.status > p {
+	flex-basis: 50%;
+	text-align: center;
+	color: var(--color-slate-500);
+}
+.buy {
+	color: #5aa469;
+}
+.sell {
+	color: #a45a5a;
+}
+.status > p:first-child {
+	border-left: 1px solid #94a3b880;
+}
+
+.tableContainer {
+	display: flex;
+	gap: 8px;
+	padding: 0 24px;
+}
+.tableContainer table {
+	flex-grow: 1;
+}
+.tableContainer th,
+.tableContainer td {
+	padding: 4px 16px;
+}
+.tableContainer th:first-child,
+.tableContainer td:first-child {
+	text-align: right;
+}
+.tableContainer th:last-child,
+.tableContainer td:last-child {
+	text-align: left;
+}
+table {
+	border-collapse: collapse;
+	border-radius: 2px;
+}
+.tableContainer thead th {
+	border-radius: 1px;
+	border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+	background: #f1f5f9;
+}
+.tableContainer tbody tr {
+	margin-bottom: 4px;
+	background: #f1f5f9;
+    border-bottom: 2px solid #fff;
+}
+.tableContainer td {
+	color: #64748b;
+}
+.tableContainer table:first-child tr {
+	border-right: 2px solid #5aa469;
+}
+.tableContainer table:last-child tr {
+	border-right: 2px solid #a45a5a;
+}
+.bg {
+	border-radius: 2px;
+	background: rgba(90, 164, 105, 0.1);
+	position: absolute;
+	height: 100%;
+}
+.row {
+	position: relative;
+}

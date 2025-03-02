@@ -2,13 +2,23 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginLayout from "./pages/LoginLayout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import MainLayout from "./pages/MainLayout";
+import Home from "./pages/Home";
 
 const publicRoutes = [];
 
-const authOnlyRoutes = [];
+const authOnlyRoutes = [{
+    path: '/',
+    element: <MainLayout/>,
+    children: [
+        {
+            index: true,
+            element: <Home/>
+        }
+    ]
+}];
 
 const notAuthOnlyRoutes = [{
-    path: '/',
     element: <LoginLayout/>,
     children: [
         {

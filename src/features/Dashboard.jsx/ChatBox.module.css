@@ -1,0 +1,15 @@
+.box{
+    border-radius: 8px;
+    border: 1px solid #CBD5E1;
+    background: #F8FAFC;
+    padding: 24px;
+}
+.heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.heading h4{
+    color: var(--color-slate-800);
+}

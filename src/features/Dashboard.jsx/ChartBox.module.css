@@ -1,0 +1,13 @@
+.box {
+	border-radius: 8px;
+	border: 1px solid #cbd5e1;
+	background: #f8fafc;
+    height: 100%;
+}
+.box h4{
+    padding: 24px;
+    color: var(--color-slate-800);
+}
+.chartContainer{
+    padding: 12px;
+}
