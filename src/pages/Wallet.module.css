@@ -1,0 +1,34 @@
+.walletMainPart {
+    padding: 16px 24px;
+}
+
+.headingColor {
+    color: var(--color-slate-700);
+}
+
+.walletContainer {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 1fr;
+    gap: 32px;
+    max-height: 100vh;
+    padding: 24px 0;
+}
+
+.buySellHeader {
+    color: var(--color-slate-500);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.buy {
+    color: var(--color-buy);
+    gap: 5px;
+    display: flex;
+}
+.sell {
+    display: flex;
+    gap: 5px;
+    color: var(--color-sell);
+}
