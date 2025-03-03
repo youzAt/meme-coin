@@ -6,6 +6,9 @@ import eyeHideIcon from "../assets/icons/eye-hide.svg";
 import Button from "../features/UI/Button";
 import { useSignup } from "../features/userAuth/useSignup";
 import { BeatLoader } from "react-spinners";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const RECAPTCHA_KEY = "6LeGHOgqAAAAACBRNCJP8v_p9fAyv4VvQInBe-eI";
 
 const Signup = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -13,8 +16,17 @@ const Signup = () => {
 	const [signupInfo, setSignupInfo] = useState({});
 	const [privacyCheck, setPrivacyCheck] = useState(false);
 	const { mutate: signup, isPending } = useSignup();
+	const [captchaCheck, setCaptchaCheck] = useState(false)
+
+	const recaptchaHandler = () => {
+		setCaptchaCheck(true)
+	};
 	const userSignupHandler = (e) => {
 		e.preventDefault();
+		if(!captchaCheck) {
+			alert("تیک من ربات نیستم را فعال کنید")
+			return;
+		}
 		if (!privacyCheck) {
 			alert("قوانین و مقررات را نپذیرفته اید");
 			return;
@@ -115,6 +127,12 @@ const Signup = () => {
 					<label className="caption" htmlFor="privacy">
 						قوانین و مقررات را می‌پذیرم.
 					</label>
+				</div>
+				<div className={styles.recap}>
+					<ReCAPTCHA
+						sitekey={RECAPTCHA_KEY}
+						onChange={recaptchaHandler}
+					/>
 				</div>
 				<Button disabled={isPending}>
 					{isPending ? <BeatLoader color="#fff" /> : "ایجاد حساب"}

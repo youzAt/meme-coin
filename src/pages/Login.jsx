@@ -9,19 +9,30 @@ import eyeHideIcon from "../assets/icons/eye-hide.svg";
 import { useState } from "react";
 import { useLogin } from "../features/userAuth/useLogin";
 import { BeatLoader } from "react-spinners";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const RECAPTCHA_KEY = "6LeGHOgqAAAAACBRNCJP8v_p9fAyv4VvQInBe-eI";
 
 const Login = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
+	const [captchaCheck, setCaptchaCheck] = useState(false);
 	const { mutate: login, isPending } = useLogin();
+
+	const recaptchaHandler = () => {
+		setCaptchaCheck(true)
+	};
 	const loginSubmitHandler = (e) => {
 		e.preventDefault();
+		if(!captchaCheck) {
+			alert("تیک من ربات نیستم را فعال کنید")
+			return;
+		}
 		if (!username || !password) {
 			alert("نام کاربری یا رمز عبور وارد نمیتواند خالی باشد");
 			return;
 		}
-
 		const userLoginInfo = {
 			username,
 			password,
@@ -56,6 +67,12 @@ const Login = () => {
 					/>
 				</div>
 				<a href="#">فراموشی رمز عبور</a>
+				<div className={styles.recap}>
+					<ReCAPTCHA
+						sitekey={RECAPTCHA_KEY}
+						onChange={recaptchaHandler}
+					/>
+				</div>
 				<Button disabled={isPending}>
 					{isPending ? <BeatLoader color="#fff" /> : "ورود"}
 				</Button>
