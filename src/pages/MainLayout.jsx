@@ -7,9 +7,8 @@ const MainLayout = () => {
 			<div className={styles.menuContainer}>
 				<SideMenu />
 			</div>
-			<main>
-				<Outlet />
-			</main>
+
+			<Outlet />
 		</div>
 	);
 };

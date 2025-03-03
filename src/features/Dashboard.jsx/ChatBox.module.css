@@ -3,6 +3,10 @@
     border: 1px solid #CBD5E1;
     background: #F8FAFC;
     padding: 24px;
+    overflow-y: auto;
+    &::-webkit-scrollbar{
+        display: none;
+    }
 }
 .heading{
     display: flex;
