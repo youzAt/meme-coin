@@ -12,6 +12,7 @@ export const useSignup = () => {
 			navigate("/");
 		},
 		onError: (er) => {
+			console.log(er.response)
 			alert(Object.entries(er.response.data)[0][1][0]);
 		},
 	});

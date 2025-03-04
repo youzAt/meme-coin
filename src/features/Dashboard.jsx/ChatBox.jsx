@@ -4,6 +4,7 @@ import addIcon from "../../assets/icons/add-circle.svg";
 import ChatItem from "./ChatItem";
 import ChatForm from "./ChatForm";
 import { useState } from "react";
+import { useMessages } from "./useMessages";
 
 const messages = [
 	{
@@ -73,6 +74,9 @@ const messages = [
 
 const ChatBox = () => {
 	const [isSendingMessage, setIsSendingMessage] = useState(false);
+	const {data} = useMessages(); // yasiiiiinnnnnn
+	const chat = []
+
 	return (
 		<div className={styles.box}>
 			<div className={styles.heading}>
@@ -93,11 +97,12 @@ const ChatBox = () => {
 				</Button>
 			</div>
 			{isSendingMessage && <ChatForm />}
-			<div className={styles.chats}>
+
+			{chat.length === 0 ? <p>پیامی جهت نمایش وحود ندارد</p> : <div className={styles.chats}>
 				{messages.map((item) => (
 					<ChatItem key={item.id} chatDetail={item} />
 				))}
-			</div>
+			</div>}
 		</div>
 	);
 };

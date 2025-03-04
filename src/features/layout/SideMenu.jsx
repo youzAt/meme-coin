@@ -1,6 +1,6 @@
 import styles from "./SideMenu.module.css";
 import logo from "../../assets/images/logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import windowIcon from "../../assets/icons/window.svg";
 import windowLightIcon from "../../assets/icons/windowLight.svg";
 import walletIcon from "../../assets/icons/wallet.svg";
@@ -44,10 +44,17 @@ const navlinks = [
 		icon: userIcon,
 		iconLight: userLightIcon,
 		to: "/profile",
-		subLinks: ["ویرایش پروفایل"]
+		subLinks: ["ویرایش پروفایل"],
 	},
 ];
 const SideMenu = () => {
+	const navigate = useNavigate();
+	const logoutHandler = () => {
+		localStorage.removeItem("memecoin-access");
+		localStorage.removeItem("memecoin-refresh");
+		navigate("/login");
+	};
+
 	return (
 		<div className={styles.sideMenu}>
 			<div className={styles.logo}>
@@ -90,7 +97,9 @@ const SideMenu = () => {
 			<div className={styles.empty}></div>
 			<button className={styles.outBtn}>
 				<img src={logoutIcon} alt="icon" />
-				<span className={"body"}>خروج از حساب کاربری</span>
+				<span onClick={logoutHandler} className={"body"}>
+					خروج از حساب کاربری
+				</span>
 			</button>
 		</div>
 	);
