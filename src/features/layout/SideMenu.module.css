@@ -33,14 +33,14 @@
     gap: 8px;
     margin-bottom: 8px;
 }
-.navItem.active{
+.navItem:global(.active){
     background-color: #104370B2;
     color: #F8FAFC;
 }
-.navItem.active .navIcon {
+.navItem:global(.active) .navIcon {
     display: none;
 }
-.navItem:not(.active) .navIconLight{
+.navItem:not(:global(.active)) .navIconLight{
     display: none
 }
 .sub{

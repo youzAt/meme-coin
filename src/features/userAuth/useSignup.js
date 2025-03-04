@@ -7,8 +7,8 @@ export const useSignup = () => {
 	const { mutate, isPending } = useMutation({
 		mutationFn: signup,
 		onSuccess: (data) => {
-			localStorage.setItem("memeCoin-access", data.access);
-			localStorage.setItem("memeCoin-refresh", data.refresh);
+			localStorage.setItem("memecoin-access", data.access);
+			localStorage.setItem("memecoin-refresh", data.refresh);
 			navigate("/");
 		},
 		onError: (er) => {

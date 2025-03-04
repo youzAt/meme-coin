@@ -1,0 +1,79 @@
+.box {
+	border-radius: 8px;
+	background: #fff;
+	padding: 24px 32px;
+}
+.heading {
+	color: var(--color-slate-800);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 16px;
+}
+.heading span {
+	font-size: 24px;
+	cursor: pointer;
+}
+.description {
+	color: var(--color-slate-500);
+	line-height: 200%;
+	margin-bottom: 24px;
+}
+.description img{
+    vertical-align: middle;
+}
+.form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.inputBox input {
+	width: 100%;
+	/* padding: 8px 16px; */
+	/* border-radius: 4px; */
+	appearance: textfield;
+	padding-left: 64px;
+    font-size: 16px;
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+}
+.inputBox {
+	position: relative;
+}
+.btn {
+	position: absolute;
+	left: 8px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+.btn button {
+	all: unset;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+}
+
+.pricesBtn {
+    margin-top: 8px;
+    margin-bottom: 32px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.pricesBtn button {
+	all: unset;
+	color: var(--color-slate-600, #475569);
+	font-size: 14px;
+	font-weight: 400;
+	border-radius: 50px;
+	border: 1px solid var(--slate-500, #64748b);
+	background: rgba(216, 224, 233, 0.2);
+	padding: 6px 8px;
+    cursor: pointer;
+}

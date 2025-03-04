@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
 	const [accessToken, setAccessToken] = useState(() =>
 		localStorage.getItem("memecoin-access")
 	);
-	const [refreshToken] = useState(() =>
+	const [refreshToken, setRefreshToken] = useState(() =>
 		localStorage.getItem("memecoin-refresh")
 	);
 	const [isLoading, setIsLoading] = useState(false);
@@ -40,8 +40,7 @@ const AuthProvider = ({ children }) => {
 				return;
 			}
 			try {
-				const data = await api.get("/users/checklogin/");
-				console.log(data);
+				await api.get("/users/checklogin/");
 				setIsLogin(true);
 			} catch {
 				localStorage.removeItem("memecoin-access");
@@ -66,47 +65,47 @@ const AuthProvider = ({ children }) => {
 		};
 	}, [accessToken]);
 
-	// useLayoutEffect(() => {
-	// 	const refreshInterceptor = api.interceptors.response.use(
-	// 		(response) => response,
-	// 		async (error) => {
-	// 			const originalRequest = error.config;
-	// 			if (
-	// 				error.response.status === 401 &&
-	// 				error.response.data.code === "token_not_valid"
-	// 			) {
-	// 				try {
-	// 					const response = await api.post(
-	// 						"/users/token/refresh/",
-	// 						{
-	// 							refresh: refreshToken,
-	// 						}
-	// 					);
-	// 					setAccessToken(response.data.access);
-	// 					localStorage.setItem(
-	// 						"memecoin-access",
-	// 						response.data.access
-	// 					);
-	// 					setIsLogin(true);
+	useLayoutEffect(() => {
+		const refreshInterceptor = api.interceptors.response.use(
+			(response) => response,
+			async (error) => {
+				const originalRequest = error.config;
+				if (
+					error.response.status === 401 &&
+					error.response.data.code === "token_not_valid"
+				) {
+					try {
+						const response = await api.post(
+							"/users/token/refresh/",
+							{
+								refresh: refreshToken,
+							}
+						);
+						setAccessToken(response.data.access);
+						localStorage.setItem(
+							"memecoin-access",
+							response.data.access
+						);
+						setIsLogin(true);
 
-	// 					originalRequest.headers.Authorization = `Bearer ${response.data.access}`;
-	// 					originalRequest._retry = true;
-	// 					return api(originalRequest);
-	// 				} catch {
-	// 					localStorage.removeItem("memecoin-access");
-	// 					localStorage.removeItem("memecoin-refresh");
-	// 					setAccessToken(null);
-	// 					setRefreshToken(null);
-	// 					setIsLogin(false);
-	// 				}
-	// 			}
-	// 			return Promise.reject(error);
-	// 		}
-	// 	);
-	// 	return () => {
-	// 		api.interceptors.response.eject(refreshInterceptor);
-	// 	};
-	// }, [refreshToken]);
+						originalRequest.headers.Authorization = `Bearer ${response.data.access}`;
+						originalRequest._retry = true;
+						return api(originalRequest);
+					} catch {
+						localStorage.removeItem("memecoin-access");
+						localStorage.removeItem("memecoin-refresh");
+						setAccessToken(null);
+						setRefreshToken(null);
+						setIsLogin(false);
+					}
+				}
+				return Promise.reject(error);
+			}
+		);
+		return () => {
+			api.interceptors.response.eject(refreshInterceptor);
+		};
+	}, [refreshToken]);
 	return (
 		<authContext.Provider
 			value={{ isLogin, setIsLogin, setAccessToken, isLoading }}

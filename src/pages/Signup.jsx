@@ -37,6 +37,7 @@ const Signup = () => {
 		}
 		if (signupInfo.password !== signupInfo.confirm_password) {
 			alert("رمز عبور و تکرار آن باید برابر باشند");
+			return;
 		}
 		signup(signupInfo);
 	};

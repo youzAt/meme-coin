@@ -5,27 +5,46 @@ import windowIcon from "../../assets/icons/window.svg";
 import windowLightIcon from "../../assets/icons/windowLight.svg";
 import walletIcon from "../../assets/icons/wallet.svg";
 import walletLightIcon from "../../assets/icons/walletLight.svg";
-import chatIcon from "../../assets/icons/chat.svg";
-import chatLightIcon from "../../assets/icons/chatLight.svg";
-import logoutIcon from '../../assets/icons/out.svg'
+// import chatIcon from "../../assets/icons/chat.svg";
+// import chatLightIcon from "../../assets/icons/chatLight.svg";
+import logoutIcon from "../../assets/icons/out.svg";
+import userIcon from "../../assets/icons/user2.svg";
+import userLightIcon from "../../assets/icons/user2Light.svg";
 const navlinks = [
 	{
+		to: "/",
 		label: "صفحه اصلی",
 		icon: windowIcon,
 		iconLight: windowLightIcon,
+		subLinks: [
+			"نمودار قیمت",
+			"حجم و تعداد تراکنش ها",
+			"مشاهده و ارسال پیام",
+			"نمایش و افزایش اعتبار",
+		],
 	},
+
 	{
+		to: "/wallet",
 		label: "کیف پول",
 		icon: walletIcon,
 		iconLight: walletLightIcon,
 
 		subLinks: ["افزایش اعتبار", "انتقال اعتبار", " تراکنش ها"],
 	},
+	// {
+	// 	to: "/",
+	// 	label: "پیام ها",
+	// 	icon: chatIcon,
+	// 	iconLight: chatLightIcon,
+	// 	subLinks: ["ارسال پیام", "صندوق دریافتی"],
+	// },
 	{
-		label: "پیام ها",
-		icon: chatIcon,
-		iconLight: chatLightIcon,
-		subLinks: ["ارسال پیام", "صندوق دریافتی"],
+		label: "پروفایل",
+		icon: userIcon,
+		iconLight: userLightIcon,
+		to: "/profile",
+		subLinks: ["ویرایش پروفایل"]
 	},
 ];
 const SideMenu = () => {
@@ -35,9 +54,12 @@ const SideMenu = () => {
 				<img src={logo} alt="logo" />
 			</div>
 			<nav className={styles.navBar}>
-				{navlinks.map((item, index) => (
+				{navlinks.map((item) => (
 					<li key={item.label}>
-						<NavLink className={(index === 0 ? styles.active: "") + " " + styles.navItem}>
+						<NavLink
+							to={item.to ? item.to : "#"}
+							className={styles.navItem}
+						>
 							<img
 								className={styles.navIcon}
 								src={item.icon}
@@ -53,7 +75,10 @@ const SideMenu = () => {
 						{item.subLinks && (
 							<ul className={styles.subLinks}>
 								{item.subLinks.map((sub, index) => (
-									<li className={"body " + styles.sub} key={index}>
+									<li
+										className={"body " + styles.sub}
+										key={index}
+									>
 										{sub}
 									</li>
 								))}
@@ -62,11 +87,11 @@ const SideMenu = () => {
 					</li>
 				))}
 			</nav>
-            <div className={styles.empty}></div>
-            <button className={styles.outBtn} >
-                <img src={logoutIcon} alt="icon" />
-                <span className={"body"}>خروج از حساب کاربری</span>
-            </button>
+			<div className={styles.empty}></div>
+			<button className={styles.outBtn}>
+				<img src={logoutIcon} alt="icon" />
+				<span className={"body"}>خروج از حساب کاربری</span>
+			</button>
 		</div>
 	);
 };
