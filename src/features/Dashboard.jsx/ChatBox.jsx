@@ -74,8 +74,7 @@ const messages = [
 
 const ChatBox = () => {
 	const [isSendingMessage, setIsSendingMessage] = useState(false);
-	const {data} = useMessages(); // yasiiiiinnnnnn
-	const chat = []
+	const { data, isLoading } = useMessages(); // yasiiiiinnnnnn
 
 	return (
 		<div className={styles.box}>
@@ -98,11 +97,15 @@ const ChatBox = () => {
 			</div>
 			{isSendingMessage && <ChatForm />}
 
-			{chat.length === 0 ? <p>پیامی جهت نمایش وحود ندارد</p> : <div className={styles.chats}>
-				{messages.map((item) => (
-					<ChatItem key={item.id} chatDetail={item} />
-				))}
-			</div>}
+			{data.length === 0 ? (
+				<p>پیامی جهت نمایش وحود ندارد</p>
+			) : (
+				<div className={styles.chats}>
+					{data.map((item) => (
+						<ChatItem key={item.id} chatDetail={item} />
+					))}
+				</div>
+			)}
 		</div>
 	);
 };
