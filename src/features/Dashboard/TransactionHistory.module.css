@@ -1,0 +1,27 @@
+.transaction {
+    display: flex;
+}
+
+.transaction > * {
+    width: 25%;
+    text-align: center;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.transactionStatus {
+    color: #f8fafc;
+    border-radius: 4px;
+}
+
+.transactionStatus.done {
+    background-color: #75a47f;
+}
+
+.transactionStatus.failed {
+    background-color: #a47575;
+}
+
+.transactionStatus.pending {
+    background-color: #a6aebf;
+}

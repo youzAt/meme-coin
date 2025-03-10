@@ -1,5 +1,5 @@
 .walletMainPart {
-    padding: 16px 24px;
+    padding: 20px 24px;
 }
 
 .headingColor {
@@ -13,6 +13,38 @@
     gap: 32px;
     max-height: 100vh;
     padding: 24px 0;
+}
+
+.wallet > * {
+    margin-top: 20px;
+}
+
+.wallet > button {
+    width: 100%;
+}
+
+.walletAddress {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #e0edfff4;
+    backdrop-filter: blur(24px);
+    gap: 20px;
+    border-radius: 4px;
+}
+
+.walletAddress > div {
+    border-radius: 4px;
+    background-color: #d8e0e9;
+    width: 75%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #b2bdcc4d;
+    gap: 15px;
 }
 
 .buySellHeader {
@@ -32,3 +64,96 @@
     gap: 5px;
     color: var(--color-sell);
 }
+
+.amount {
+    width: 100%;
+    gap: 10px;
+    display: flex;
+
+    margin-top: 20px;
+}
+
+.amount > div {
+    width: 100%;
+    background-color: #e0edfff4;
+    padding: 10px;
+}
+
+.amount > div > * {
+    margin-top: 10px;
+    color: var(--color-slate-600);
+}
+
+.amount > div > p {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    color: var(--color-slate-800);
+}
+
+.amount > div > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-slate-500);
+    text-align: center;
+}
+
+.profit p:last-of-type {
+    color: var(--color-buy);
+}
+
+.loss p:last-of-type {
+    color: var(--color-sell);
+}
+
+.addAmount {
+    width: 100%;
+    border-radius: 4px;
+    background-color: var(--color-primary);
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #f8fafc;
+}
+
+.transportAmount {
+    width: 100%;
+}
+
+.transportAmount > * {
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.transportAmount h5 {
+    font-size: 16px;
+    color: var(--color-slate-700);
+}
+
+.transportAmount input {
+    text-align: left;
+    font-size: 16px;
+}
+
+.transportAmount button {
+    padding: 5px;
+    background-color: var(--color-primary);
+    cursor: pointer;
+    color: #f8fafc;
+}
+
+.transportAmount button.disable {
+    background-color: #165e9d4d;
+    cursor: not-allowed;
+}
+
+.transportAmount > p {
+    color: #64748b;
+    font-size: 14px;
+}
+
