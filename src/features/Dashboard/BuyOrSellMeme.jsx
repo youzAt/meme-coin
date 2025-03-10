@@ -8,33 +8,32 @@ import decreaseIcon from "../../assets/icons/clear-rectangle-active.svg";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-const prices = [10, 20, 50, 100];
+const prices = [1, 5, 10, 50];
 
-const TransportBalance = ({ onCloseModal, destwalletAddress }) => {
+const BuyOrSellMeme = ({ onCloseModal }) => {
     const queryClient = useQueryClient();
-    const [balanceToTransport, setBalanceToTransport] = useState(0);
+    const [memeToBuyOrSell, setMemeToBuyOrSell] = useState(0);
+    const [isBuying, setIsBuying] = useState(true);
 
     const increaseHandler = (e) => {
         e.preventDefault();
-        setBalanceToTransport((cur) => cur + 1);
+        setMemeToBuyOrSell((cur) => cur + 1);
     };
     const decreaseHandler = (e) => {
         e.preventDefault();
-        if (balanceToTransport < 1) return;
-        setBalanceToTransport((cur) => cur - 1);
+        if (memeToBuyOrSell < 1) return;
+        setMemeToBuyOrSell((cur) => cur - 1);
     };
     const submitHandler = (e) => {
         e.preventDefault();
-        if (balanceToTransport < 1) {
-            alert("حداقل مقدار انتقال 1 میم کوین است.");
+        if (memeToBuyOrSell < 1) {
+            alert(`حداقل مقدار خرید 1 میم کوین است.`);
             return;
         }
-
         fetch("http://127.0.0.1:8000/transactions/", {
             body: JSON.stringify({
-                type: "T",
-                amount: balanceToTransport,
-                to_add: destwalletAddress,
+                type: isBuying ? "B" : "S",
+                amount: memeToBuyOrSell,
             }),
             headers: {
                 "content-type": "application/json",
@@ -46,8 +45,9 @@ const TransportBalance = ({ onCloseModal, destwalletAddress }) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                queryClient.invalidateQueries(["userBalance"]);
                 console.log(data);
+                queryClient.invalidateQueries(["userBalance"]);
+                alert(`${isBuying ? "خرید" : "فروش"} انجام شد`);
                 onCloseModal();
             })
             .catch((e) => {
@@ -57,27 +57,42 @@ const TransportBalance = ({ onCloseModal, destwalletAddress }) => {
     return (
         <div className={styles.box}>
             <div className={styles.heading}>
-                <h4>انتقال اعتبار</h4>
+                <h4>خرید و فروش میم کوین</h4>
                 <span onClick={onCloseModal}>&larr;</span>
             </div>
             <p className={"caption " + styles.description}>
-                1- حداقل مبلغ انتقال اعتبار 1 میم کوین می‌باشد.
+                1- حداقل مبلغ {isBuying ? "خرید" : "فروش"} می‌باشد.
                 <br />
                 2- با هربار کلیک روی <img src={increaseIcon} alt="add icon" /> 1
-                میم کوین را میتوانید انتقال دهید
+                میم کوین برای شما{" "}
+                {isBuying ? "خریداری می شود" : "به فروش می رسد"}
             </p>
-            <div className={styles.walletAddress}>
-                آدرس:
-                <p>{destwalletAddress}</p>
-            </div>
             <form className={styles.form} onSubmit={submitHandler}>
+                <div className={styles.buyOrSell}>
+                    <div
+                        onClick={() => {
+                            setIsBuying(true);
+                        }}
+                        className={`${isBuying && styles.active}`}
+                    >
+                        خرید
+                    </div>
+                    <div
+                        onClick={() => {
+                            setIsBuying(false);
+                        }}
+                        className={`${!isBuying && styles.active}`}
+                    >
+                        فروش
+                    </div>
+                </div>
                 <div className={styles.inputBox}>
                     <Input
                         min={0}
                         type="number"
-                        placeholder="1"
-                        value={balanceToTransport}
-                        onChange={(e) => setBalanceToTransport(e.target.value)}
+                        placeholder="1 میم کوین"
+                        value={memeToBuyOrSell}
+                        onChange={(e) => setMemeToBuyOrSell(e.target.value)}
                     />
                     <div className={styles.btn}>
                         <Button
@@ -96,7 +111,7 @@ const TransportBalance = ({ onCloseModal, destwalletAddress }) => {
                         >
                             <img
                                 src={
-                                    balanceToTransport >= 1
+                                    memeToBuyOrSell >= 1
                                         ? decreaseIcon
                                         : decreaseDisIcon
                                 }
@@ -110,7 +125,7 @@ const TransportBalance = ({ onCloseModal, destwalletAddress }) => {
                         <button
                             onClick={(e) => {
                                 e.preventDefault();
-                                setBalanceToTransport(item);
+                                setMemeToBuyOrSell(item);
                             }}
                             key={item}
                         >
@@ -124,4 +139,4 @@ const TransportBalance = ({ onCloseModal, destwalletAddress }) => {
     );
 };
 
-export default TransportBalance;
+export default BuyOrSellMeme;

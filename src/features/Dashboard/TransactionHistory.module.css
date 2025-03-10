@@ -1,7 +1,5 @@
-
-
 .transactions {
-    max-height: 200px;
+    max-height: 175px;
     overflow-y: auto;
 }
 
@@ -30,5 +28,21 @@
 }
 
 .transactionStatus.pending {
+    background-color: #a6aebf;
+}
+
+.filter {
+    display: flex;
+    gap: 10px;
+}
+
+.filter select {
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.confirmFilter {
+    padding: 5px;
+    border-radius: 8px;
     background-color: #a6aebf;
 }

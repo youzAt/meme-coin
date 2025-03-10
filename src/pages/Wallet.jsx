@@ -7,6 +7,7 @@ import copyCheck from "../assets/icons/copy-check.svg";
 import addIcon from "../assets/icons/add.svg";
 import IncreaseBalance from "../features/Dashboard/IncreaseBalance";
 import TransportBalance from "../features/Dashboard/transportBalance";
+import BuyOrSellMeme from "../features/Dashboard/BuyOrSellMeme";
 import { useBalance } from "../features/Dashboard/useBalance";
 import Modal from "../features/UI/Modal";
 import Button from "../features/UI/Button";
@@ -16,7 +17,7 @@ import TransactionHistory from "../features/Dashboard/TransactionHistory";
 import { useEffect, useState } from "react";
 const Wallet = () => {
     const { data, isLoading } = useBalance();
-
+    let disable = true;
     const [walletAddress, setWalletAddress] = useState("");
     const [destwalletAddress, setDestWalletAddress] = useState("");
 
@@ -116,6 +117,16 @@ const Wallet = () => {
                         <IncreaseBalance />
                     </Modal.Window>
                 </Modal>
+                <Modal>
+                    <Modal.Open opens="buyOrSellMeme">
+                        <Button isSmall>
+                            <span>خرید و فروش</span>
+                        </Button>
+                    </Modal.Open>
+                    <Modal.Window name="buyOrSellMeme">
+                        <BuyOrSellMeme />
+                    </Modal.Window>
+                </Modal>
                 <div className={styles.transportAmount}>
                     <h5>آدرس کیف پول(مقصد)</h5>
                     <input
@@ -125,7 +136,14 @@ const Wallet = () => {
                     />
                     <Modal>
                         <Modal.Open opens="transportBalance">
-                            <Button isSmall>انتقال اعتبار</Button>
+                            <Button
+                                disable={
+                                    destwalletAddress.length > 0 ? false : true
+                                }
+                                isSmall
+                            >
+                                انتقال اعتبار
+                            </Button>
                         </Modal.Open>
                         <Modal.Window name="transportBalance">
                             <TransportBalance
@@ -139,7 +157,7 @@ const Wallet = () => {
                     </p>
                 </div>
 
-                <TransactionHistory />
+                <TransactionHistory amount={data} />
             </div>
             <div className={styles.walletMainPart}>
                 <h4 className={styles.headingColor}>وضعیت خرید و فروش</h4>

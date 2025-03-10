@@ -1,6 +1,6 @@
-.btn{
+.btn {
     background-color: var(--color-primary);
-    color: #F8FAFC;
+    color: #f8fafc;
     padding: 14px;
     border-radius: 8px;
     font-size: 18px;
@@ -12,16 +12,20 @@
     justify-content: center;
     border: 1px solid var(--color-primary);
     gap: 4px;
-    &:hover{
+    &:hover {
         opacity: 0.9;
     }
 }
-.btn:global(.body){
+.btn:global(.body) {
     border-radius: 4px;
     padding: 6px 12px;
 }
-.btn.secondary{
+.btn.secondary {
     border-color: var(--color-primary);
     color: var(--color-primary);
     background-color: transparent;
+}
+.disable {
+    cursor: not-allowed;
+    background-color: #165e9d4d;
 }
