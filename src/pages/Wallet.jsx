@@ -3,8 +3,10 @@ import buyIcon from "../assets/icons/wallet-add 2.svg";
 import sellIcon from "../assets/icons/wallet-minus 01.svg";
 import comboShape from "../assets/icons/Combo shape.svg";
 import arrowDown from "../assets/icons/arrow-down.svg";
+import copyCheck from "../assets/icons/copy-check.svg";
 import addIcon from "../assets/icons/add.svg";
 import IncreaseBalance from "../features/Dashboard/IncreaseBalance";
+import TransportBalance from "../features/Dashboard/transportBalance";
 import { useBalance } from "../features/Dashboard/useBalance";
 import Modal from "../features/UI/Modal";
 import Button from "../features/UI/Button";
@@ -121,7 +123,16 @@ const Wallet = () => {
                         value={destwalletAddress}
                         onChange={(e) => setDestWalletAddress(e.target.value)}
                     />
-                    <button>انتقال اعتبار</button>
+                    <Modal>
+                        <Modal.Open opens="transportBalance">
+                            <Button isSmall>انتقال اعتبار</Button>
+                        </Modal.Open>
+                        <Modal.Window name="transportBalance">
+                            <TransportBalance
+                                destwalletAddress={destwalletAddress}
+                            />
+                        </Modal.Window>
+                    </Modal>
                     <p>
                         بعد از اینکه آدرس کیف پول مقصد را مشخص کردید، انتقال
                         اعتبار فعال می‌شود.

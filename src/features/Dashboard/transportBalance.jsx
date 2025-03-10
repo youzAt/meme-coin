@@ -6,11 +6,14 @@ import increaseIcon from "../../assets/icons/add-rectangle.svg";
 import decreaseDisIcon from "../../assets/icons/clear-rectangle.svg";
 import decreaseIcon from "../../assets/icons/clear-rectangle-active.svg";
 import { useState } from "react";
+import { useTransportBalance } from "./useTransportBalance";
 
 const prices = [100000, 200000, 500000, 10000000];
 
-const TransportBalance = ({ onCloseModal }) => {
+const TransportBalance = ({ onCloseModal, destwalletAddress }) => {
     const [balanceToTransport, setBalanceToTransport] = useState(0);
+
+    const { mutate: transportBalance, isPending } = useTransportBalance();
 
     const increaseHandler = (e) => {
         e.preventDefault();
@@ -27,7 +30,7 @@ const TransportBalance = ({ onCloseModal }) => {
             alert("حداقل مقدار واریزی 50،000 تومان است.");
             return;
         }
-        TransportBalance(balanceToTransport, {
+        transportBalance(balanceToTransport, {
             onSuccess: () => {
                 onCloseModal();
             },
@@ -36,7 +39,7 @@ const TransportBalance = ({ onCloseModal }) => {
     return (
         <div className={styles.box}>
             <div className={styles.heading}>
-                <h4>افزایش اعتبار</h4>
+                <h4>انتقال اعتبار</h4>
                 <span onClick={onCloseModal}>&larr;</span>
             </div>
             <p className={"caption " + styles.description}>
@@ -48,6 +51,10 @@ const TransportBalance = ({ onCloseModal }) => {
                 />{" "}
                 مبلغ 50،000 تومان به اعتبار شما اضافه می شود.
             </p>
+            <div className={styles.walletAddress}>
+                آدرس:
+                <p>{destwalletAddress}</p>
+            </div>
             <form className={styles.form} onSubmit={submitHandler}>
                 <div className={styles.inputBox}>
                     <Input
